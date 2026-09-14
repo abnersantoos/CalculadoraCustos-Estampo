@@ -1,48 +1,37 @@
-# 🛠️ Sistema de Análise e Precificação de Ferramentais (Moldes & Estampos)
+Markdown
 
-Projeto de Engenharia de Dados e Análise Financeira desenvolvido para a estimativa automatizada de custos de fabricação, usinagem e ciclo de vida de ferramentas industriais (Moldes de Injeção Plástica e Estampos de Corte/Dobra/Repuxo).
+# ✂️ Calculadora de Custo e Orçamento para Estampos Industriais
+
+Projeto em Python focado no cálculo automatizado de custos de fabricação, usinagem por eletroerosão e tratamento térmico de estampos de corte, dobra e repuxo.
 
 ---
 
 ## 📌 Visão Geral do Projeto
 
-Na indústria de manufatura e no setor automotivo, a orçamentação precisa de ferramentais protótipos e de série é fundamental para manter a margem operacional e viabilizar novos produtos.
+Estampos progressivos e combinados exigem um levantamento rigoroso de custos focados em aços ferramenta de alta liga (como D2 e VND), processos de têmpera/revenimento e horas extensas de eletroerosão a fio (WEDM).
 
-Este projeto em **Python** resolve o problema de precificação manual ao implementar um **pipeline de cálculo automatizado** que considera:
-* **Cubagem e Peso de Aço:** Cálculo automático via densidade volumétrica ($\approx 7,85 \text{ g/cm}^3$).
-* **Capacidade Operacional:** Horas/máquina e horas/homem para CNC, Eletroerosão (EDM/WEDM), Ajuste e Try-out.
-* **Custos Específicos do Processo:**
-  * *Injeção:* Insumos como sistemas de câmara quente e acionamentos (gavetas/pinos).
-  * *Estamparia:* Tratamento térmico (têmpera/revenimento de Aço D2/VND) e componentes padronizados (colunas/molas prato).
-* **Precificação Final:** Aplicação de margens operacionais, contingência e impostos sobre o Custo Direto de Fabricação.
+Este módulo calcula automaticamente:
+* **Peso Bruto de Aço Misto:** Cubagem e pesagem considerando o Aço 1045 (placas/bases) e Aço D2/VND (punções e matrizes).
+* **Carga Horária & Processos:** Custo por taxa/hora de Projeto CAD/CAM, Usinagem CNC, Eletroerosão a Fio (WEDM), Ajuste de Folgas de Corte e Try-out em Prensa.
+* **Tratamento Térmico & Padronizados:** Custo de têmpera e revenimento, colunas de guia, buchas de esfera e molas prato.
+* **Precificação Final:** Formatação do Custo Direto de Fabricação (CPV) e cálculo da margem de venda.
 
 ---
 
 ## 📐 Fórmulas Utilizadas
 
-### 1. Estimativa de Peso Bruto ($kg$)
-$$\text{Volume } (cm^3) = \frac{\text{Comprimento } (mm)}{10} \times \frac{\text{Largura } (mm)}{10} \times \frac{\text{Altura } (mm)}{10}$$
+$$\text{Volume } (cm^3) = \frac{\text{Comprimento}}{10} \times \frac{\text{Largura}}{10} \times \frac{\text{Altura}}{10}$$
 
 $$\text{Peso } (kg) = \frac{\text{Volume } (cm^3) \times 7,85}{1000}$$
 
-### 2. Custo Total de Mão de Obra e Usinagem
-$$\text{Custo M.O.} = \sum (\text{Horas Estimadas}_i \times \text{Taxa Hora}_i)$$
-
-### 3. Precificação Final
-$$\text{Valor Final} = (\text{Custo M.O.} + \text{Custo Materiais}) \times \left(1 + \frac{\text{Margem \%}}{100}\right)$$
+$$\text{Valor Final} = (\text{Custo M.O.} + \text{Aço} + \text{Tratamento Térmico} + \text{Padronizados}) \times \left(1 + \frac{\text{Margem \%}}{100}\right)$$
 
 ---
 
-## 🚀 Estrutura dos Arquivos
-
-* `orcamento_ferramental.py`: Módulo de cálculo para Moldes de Injeção Plástica.
-* `orcamento_estampo.py`: Módulo de cálculo para Estampos de Corte, Dobra e Repuxo.
-
----
-
-## ⚙️ Como Executar o Projeto
+## ⚙️ Como Executar
 
 1. Certifique-se de ter o **Python 3.x** instalado.
-2. Clone o repositório:
+2. Clone o repositório e navegue até a pasta:
    ```bash
-   git clone [https://github.com/SEU_USUARIO/analise-custo-ferramental.git](https://github.com/SEU_USUARIO/analise-custo-ferramental.git)
+   git clone [https://github.com/SEU_USUARIO/orcameto-ferramentais.git](https://github.com/SEU_USUARIO/orcameto-ferramentais.git)
+   cd orcameto-ferramentais
